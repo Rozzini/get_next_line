@@ -25,8 +25,10 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*ft_strchr(const char *s, int buf_size);
+size_t	ft_strlen(char *s);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
+int	ft_strchr(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strcpy(char *dest, char *src, size_t n);
 
 #endif
