@@ -24,20 +24,18 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-
-int	ft_strchr(char *s)
+int	ft_strchr(char *str, int *i, int *give_loc)
 {
-	char	*str;
-	int	i;
-
-	i = 0;
-	str = (char *)s;
-	while (i < (ft_strlen(s)))
+	while (*i < (ft_strlen(str)))
 	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
+		if (str[*i] == '\n')
+		{
+			*give_loc = *i;
+			return (*i);
+		}
+		(*i)++;
 	}
+	*give_loc = -1;
 	return (-1);
 }
 
@@ -48,7 +46,6 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (s2 == NULL || s2[0] == '\0')
 		return (NULL);
-
 	li[0] = ft_strlen(s1);
 	li[1] = ft_strlen(s2);
 	li[2] = 0;

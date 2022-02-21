@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*fill_buf(char *buf, int loc)
 {
@@ -44,13 +44,16 @@ char	*create_result(char *buf, int loc)
 	buf[loc + 1] = c;
 	return (result);	
 }
-char	*ft_read(int fd, char *buf)
+
+char	*ft_read(int fd, char *buf, int *loc)
 {
 	char	s[BUFFER_SIZE + 1];
 	int	read_c;
+	int	i;
 
-	read_c = 1;
-	while(ft_strchr(buf) == -1)
+	i = 0;
+	read_c = 0;
+	while(ft_strchr(buf, &i, loc) == -1)
 	{
 		read_c = read(fd, s, BUFFER_SIZE);
 		if (read_c <= 0)
@@ -63,58 +66,20 @@ char	*ft_read(int fd, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf[256];
+	static char	*buf[1024];
 	char		*result;
 	int		loc;
 
+	loc = 0;
 	result = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 255)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
-	buf[fd] = ft_read(fd, buf[fd]);
+	buf[fd] = ft_read(fd, buf[fd], &loc);
 	if(buf[fd] == NULL)
 		return (NULL);
-	loc = ft_strchr(buf[fd]); 
 	result = create_result(buf[fd], loc);
 	buf[fd] = fill_buf(buf[fd], loc);
 	if(result[0] == '\0')
 		result = NULL;
 	return (result);
 }
-
-/*int main ()
-{
-    	int fd;
-	char *s;
-
-	fd = open("test.txt", O_RDONLY);
-
-	printf("\noutput1\n");
-	s = get_next_line(fd);
-	printf("%s_________________________\n", s);
-
-	printf("\noutput2\n");
-	s = get_next_line(fd);
-	printf("%s_________________________\n", s);
-
-	printf("\noutput3\n");
-	s = get_next_line(fd);
-	printf("%s__________________________\n\n", s);
-
-	printf("\noutput4\n");
-	s = get_next_line(fd);
-	printf("%s__________________________\n\n", s);
-
-	printf("\noutput5\n");
-	s = get_next_line(fd);
-	printf("%s__________________________\n\n", s);
-
-	printf("\noutput6\n");
-	s = get_next_line(fd);
-	printf("%s__________________________\n\n", s);
-
-	printf("\noutput7\n");
-	s = get_next_line(fd);
-	printf("%s__________________________\n\n", s);
-
-	return 0;
-}*/

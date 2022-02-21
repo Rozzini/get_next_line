@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *s)
 {
@@ -24,20 +24,18 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-
-int	ft_strchr(char *s)
+int	ft_strchr(char *str, int *i, int *give_loc)
 {
-	char	*str;
-	int	i;
-
-	i = 0;
-	str = (char *)s;
-	while (i < (ft_strlen(s)))
+	while (*i < (ft_strlen(str)))
 	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
+		if (str[*i] == '\n')
+		{
+			*give_loc = *i;
+			return (*i);
+		}
+		(*i)++;
 	}
+	*give_loc = -1;
 	return (-1);
 }
 
