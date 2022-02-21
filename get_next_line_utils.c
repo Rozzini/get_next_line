@@ -6,7 +6,7 @@
 /*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 21:05:57 by mraspors          #+#    #+#             */
-/*   Updated: 2022/02/19 01:35:19 by mraspors         ###   ########.fr       */
+/*   Updated: 2022/02/22 03:46:22 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_strchr(char *str, int *i, int *give_loc)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int	li[3];
+	int		li[3];
 	char	*str;
 
 	if (s2 == NULL || s2[0] == '\0')
@@ -54,9 +54,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	while (li[2] < li[0] + li[1] + 1)
 	{
-		if(li[2] < li[0])
+		if (li[2] < li[0])
 			str[li[2]] = s1[li[2]];
-		if(li[2] >= li[0])
+		if (li[2] >= li[0])
 			str[li[2]] = s2[li[2] - li[0]];
 		li[2]++;
 	}

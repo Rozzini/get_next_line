@@ -6,7 +6,7 @@
 /*   By: mraspors <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 21:05:23 by mraspors          #+#    #+#             */
-/*   Updated: 2022/02/19 03:40:30 by mraspors         ###   ########.fr       */
+/*   Updated: 2022/02/22 03:24:45 by mraspors         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ char	*create_result(char *buf, int loc)
 	buf[loc + 1] = '\0';
 	result = ft_strjoin(NULL, buf);
 	buf[loc + 1] = c;
-	return (result);	
+	return (result);
 }
 
 char	*ft_read(int fd, char *buf, int *loc)
 {
 	char	s[BUFFER_SIZE + 1];
-	int	read_c;
-	int	i;
+	int		read_c;
+	int		i;
 
 	i = 0;
 	read_c = 0;
-	while(ft_strchr(buf, &i, loc) == -1)
+	while (ft_strchr(buf, &i, loc) == -1)
 	{
 		read_c = read(fd, s, BUFFER_SIZE);
 		if (read_c <= 0)
@@ -68,19 +68,18 @@ char	*get_next_line(int fd)
 {
 	static char	*buf;
 	char		*result;
-	int		loc;
+	int			loc;
 
 	loc = 0;
 	result = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	buf = ft_read(fd, buf, &loc);
-	if(buf == NULL)
-		return (NULL); 
+	if (buf == NULL)
+		return (NULL);
 	result = create_result(buf, loc);
 	buf = fill_buf(buf, loc);
-	if(result[0] == '\0')
+	if (result[0] == '\0')
 		result = NULL;
 	return (result);
 }
-
