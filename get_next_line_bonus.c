@@ -63,19 +63,19 @@ char	*ft_read(int fd, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
+	static char	*buf[256];
 	char		*result;
 	int		loc;
 
 	result = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 255)
 		return (NULL);
-	buf = ft_read(fd, buf);
-	if(buf == NULL)
+	buf[fd] = ft_read(fd, buf[fd]);
+	if(buf[fd] == NULL)
 		return (NULL);
-	loc = ft_strchr(buf); 
-	result = create_result(buf, loc);
-	buf = fill_buf(buf, loc);
+	loc = ft_strchr(buf[fd]); 
+	result = create_result(buf[fd], loc);
+	buf[fd] = fill_buf(buf[fd], loc);
 	if(result[0] == '\0')
 		result = NULL;
 	return (result);
